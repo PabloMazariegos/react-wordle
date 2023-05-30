@@ -1,13 +1,15 @@
 import React from "react";
 
-function GuessInput({guess, setGuess}) {
+function GuessInput({ trackNewGuess }) {
+  const [guess, setGuess] = React.useState("");
+
   return (
     <form
       className="guess-input-wrapper"
       onSubmit={(event) => {
         event.preventDefault();
-        setGuess('');
-        console.log({guess});
+        trackNewGuess(guess);
+        setGuess("");
       }}
     >
       <label htmlFor="guess-input">Enter guess:</label>
@@ -20,9 +22,9 @@ function GuessInput({guess, setGuess}) {
         pattern="[a-zA-z]{5}"
         title="Please enter 5 letters"
         onChange={(event) => {
-          const data = event.target.value;
-          const upperCaseData = data.toUpperCase();
-          setGuess(upperCaseData);
+          const value = event.target.value;
+          const upperValue = value.toUpperCase();
+          setGuess(upperValue);
         }}
       />
     </form>
