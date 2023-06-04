@@ -23,9 +23,6 @@ function Game() {
     const guesses = [...guessResults, newGuess];
 
     setGuessResult(guesses);
-
-    console.log({ newGuess });
-    console.log({guesses})
   };
 
   return (
