@@ -1,15 +1,22 @@
 import React from "react";
+import GuessItem from "../GuessItem/GuessItem";
+
+import { range } from '../../utils'
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
+
+const guesItemRange = range(NUM_OF_GUESSES_ALLOWED);
 
 function GuessResults({ guessResults }) {
   return (
     <div className="guess-results">
-      {guessResults && guessResults.length === 0
-        ? ""
-        : guessResults.map((guess) => (
-            <p className="guess" key={guess.key}>
-              {guess.label}
-            </p>
-          ))}
+      {
+        guesItemRange.map(item => {
+          return (
+            <GuessItem key={item} guessResult={guessResults[item]} /> 
+          )
+        })
+        
+      }
     </div>
   );
 }

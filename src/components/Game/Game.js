@@ -2,6 +2,7 @@ import React from "react";
 
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 import GuessInput from "../GuessInput";
 import GuessResults from "../GuessResults";
@@ -15,6 +16,10 @@ function Game() {
   const [guessResults, setGuessResult] = React.useState([]);
 
   const trackNewGuess = (guess) => {
+    if(guessResults.length === NUM_OF_GUESSES_ALLOWED){
+      return;
+    }
+
     const newGuess = {
       label: guess,
       key: crypto.randomUUID(),
