@@ -1,32 +1,43 @@
 import React from "react";
 import { range } from "../../utils";
 
-const getCells = (guessResult) => {
-    if(!guessResult){
-        const defaultRange = range(5);
-        return defaultRange.map(() => (
-            <span className="cell" key={crypto.randomUUID()}></span>
-        ))
-    }
 
-    let lettersCells = [];
-    const guessResultValue = guessResult.label;
-
-    for(let i = 0; i < guessResultValue.length; i++){
-        lettersCells.push(
-            <span className="cell" key={crypto.randomUUID()}>{guessResultValue[i]}</span>
-        )
-    }
-
-    return lettersCells
+const getRange = () => {
+    const defaultRange = range(5);
+    return defaultRange.map(() => (
+        <span className="cell" key={crypto.randomUUID()}></span>
+    ))
 }
 
-function GuessItem({ guessResult }) {
-    const cells = getCells(guessResult)
+const statusClass = {
+    'misplaced': 'cell misplaced',
+    'correct': 'cell correct',
+    'incorrect': 'cell incorrect'
+}
+
+const createCells = (guess) => {
+    if(!guess){
+        return getRange()
+    }
+
+    
+    return guess.map(guessValidation => {
+
+        const className = statusClass[guessValidation.status]
+
+        return (
+            <span className={className} key={crypto.randomUUID()}>{guessValidation.letter}</span>
+        )
+    });
+}
+
+function GuessItem({ guess }) {
+    console.log(createCells(guess))
+    let cells = createCells(guess)
 
     return (
     <>
-      <p className="guess">{ cells.map(cell => cell) } </p>
+      { cells.map(cell => cell) }
     </>
   );
 }

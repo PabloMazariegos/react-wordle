@@ -20,19 +20,18 @@ function Game() {
       return;
     }
 
-    const newGuess = {
-      label: guess,
-      key: crypto.randomUUID(),
-    };
+    if(!guess){
+      return
+    }
 
-    const guesses = [...guessResults, newGuess];
+    const guesses = [...guessResults, guess];
 
     setGuessResult(guesses);
   };
 
   return (
     <>
-      <GuessResults guessResults={guessResults} />
+      <GuessResults guessResults={guessResults} answer={answer}/>
       <GuessInput trackNewGuess={trackNewGuess} />
     </>
   );
